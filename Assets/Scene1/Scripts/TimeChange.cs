@@ -70,8 +70,8 @@ public class TimeChange : MonoBehaviour
     {
         hours = int.Parse(Hour.text);
         hours += amount;
-        if (hours > 12) hours = 1;
-        if (hours < 1) hours = 12;
+        if (hours > 23) hours = 0;
+        if (hours < 0) hours = 23;
         UpdateClockDisplayHours();
     }
 

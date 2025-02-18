@@ -5,45 +5,29 @@ using UnityEngine;
 public class CheckBox : MonoBehaviour
 {
     bool isOn;
-    //
+    
     [SerializeField] GameObject onStateObj;
     [SerializeField] GameObject offStateObj;
 
-    private void OnEnable()
-    {
-        isOn = false;
-        onStateObj.SetActive(false);
-        offStateObj.SetActive(true);
-    }
+	
+	private void OnMouseDown()
+	{
+		isOn = !isOn; // Переключаем состояние чекбокса
+		ToggleVisibility(onStateObj, isOn);
+		ToggleVisibility(offStateObj, !isOn);
+	}
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-    //По нажатию мыши проверяет активен ли чек бокс и меняет его состояние
-    private void OnMouseDown()
-    {
+	// Метод для включения/выключения видимости
+	private void ToggleVisibility(GameObject obj, bool visible)
+	{
+		if (obj.TryGetComponent<SpriteRenderer>(out var spriteRenderer))
+		{
+			spriteRenderer.enabled = visible;
+		}
+	}
 
-        if (isOn)
-        {
-            // make this off
-            isOn = false;
-            onStateObj.SetActive(false);
-            offStateObj.SetActive(true);
-        }
-        else
-        {
-            // make this on
-            isOn = true;
-            onStateObj.SetActive(true);
-            offStateObj.SetActive(false);
-        }
-
-    }
-
-    // Update is called once per frame
-    void Update()
+// Update is called once per frame
+void Update()
     {
         
     }
